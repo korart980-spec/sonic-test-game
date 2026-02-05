@@ -1,0 +1,94 @@
+[gd_scene load_steps=10 format=3 uid="uid://c3k4rmxk0glxx"]
+
+[ext_resource type="Script" uid="uid://cwcr4tx6aw62u" path="res://objects/coins/coin/coin.gd" id="1_1o7s2"]
+[ext_resource type="Texture2D" uid="uid://dcku2f0d6sikm" path="res://objects/objects_sprites/items-objects.png" id="1_s3apc"]
+[ext_resource type="AudioStream" uid="uid://g5427trxkdn6" path="res://objects/coins/coin/sounds/ring_collect.mp3" id="3_iwokp"]
+[ext_resource type="AudioStream" uid="uid://xb8x574wioor" path="res://characters/sonic/sounds/rings_lose.mp3" id="4_iwokp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_je4cw"]
+radius = 9.0
+
+[sub_resource type="Animation" id="Animation_iwokp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(30.9923, 10.0019, 16.0029, 16.0068)]
+}
+
+[sub_resource type="Animation" id="Animation_s3apc"]
+resource_name = "collect"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(30.9881, 27.1074, 16.0195, 15.7445), Rect2(48.998, 27.107, 16.02, 15.745), Rect2(66.988, 27.107, 16.02, 15.745), Rect2(84.993, 27.107, 16.02, 15.745), Rect2(161.318, 27.107, 16.02, 15.745)]
+}
+
+[sub_resource type="Animation" id="Animation_1o7s2"]
+resource_name = "idle"
+length = 0.53
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.266667, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(30.9952, 9.99334, 16.0146, 16.0104), Rect2(49, 9.993, 16.015, 16.01), Rect2(67, 9.993, 16.015, 16.01), Rect2(84.99, 9.993, 16.015, 16.01)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hyi47"]
+_data = {
+&"RESET": SubResource("Animation_iwokp"),
+&"collect": SubResource("Animation_s3apc"),
+&"idle": SubResource("Animation_1o7s2")
+}
+
+[node name="coin" type="Area2D"]
+collision_layer = 4
+collision_mask = 9
+script = ExtResource("1_1o7s2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 3
+texture = ExtResource("1_s3apc")
+region_enabled = true
+region_rect = Rect2(30.9923, 10.0019, 16.0029, 16.0068)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_je4cw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_hyi47")
+}
+
+[node name="coin_collect" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_iwokp")
+volume_db = -12.0
+
+[node name="coin_lose" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_iwokp")
+volume_db = -12.0
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+collision_mask = 8

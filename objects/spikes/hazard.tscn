@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://dya2qefbc3308"]
+
+[ext_resource type="Script" uid="uid://cf4or2lk6od3f" path="res://objects/spikes/hazard.gd" id="1_0p5dr"]
+[ext_resource type="Texture2D" uid="uid://dcku2f0d6sikm" path="res://objects/objects_sprites/items-objects.png" id="2_qf1l0"]
+[ext_resource type="AudioStream" uid="uid://deul5v01od2h4" path="res://objects/spike_hit.mp3" id="3_qf1l0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7kp50"]
+size = Vector2(25, 20)
+
+[node name="hazard" type="Node2D"]
+
+[node name="Hazard" type="Area2D" parent="."]
+collision_layer = 2
+script = ExtResource("1_0p5dr")
+
+[node name="Sprite2D" type="Sprite2D" parent="Hazard"]
+texture_filter = 3
+texture = ExtResource("2_qf1l0")
+region_enabled = true
+region_rect = Rect2(114.99, 13.9985, 40.017, 32.0085)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hazard"]
+position = Vector2(8.34465e-07, 0)
+scale = Vector2(1.6, 1.6)
+shape = SubResource("RectangleShape2D_7kp50")
+
+[node name="sound_effect" type="AudioStreamPlayer2D" parent="Hazard"]
+stream = ExtResource("3_qf1l0")
+volume_db = -12.0

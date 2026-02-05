@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="CharacterConfig" load_steps=3 format=3 uid="uid://bxejxikcouxpu"]
+
+[ext_resource type="Script" path="res://characters/confings/character_config.gd" id="1_5p2wg"]
+[ext_resource type="Texture2D" uid="uid://25uonlds5mxo" path="res://characters/exetior/exetior-sprites.png" id="2_of7ms"]
+
+[resource]
+script = ExtResource("1_5p2wg")
+character_name = "exetior"
+sprite_texture = ExtResource("2_of7ms")
+sprite_scale = Vector2(1, 1)
+sprite_offset = Vector2(0, 0)
+use_sprite_sheet = true
+sprite_region_rect = Rect2(0, 0, 64, 64)
+can_boost = true
+can_fly = true
+can_spindash = true
+can_roll = true
+max_speed = 700.0
+acceleration = 400.0
+jump_force = -420.0
+metadata/_custom_type_script = "uid://ctb4xoad17qle"

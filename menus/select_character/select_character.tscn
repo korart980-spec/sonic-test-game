@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://cio0gw6igib11"]
+
+[ext_resource type="Script" uid="uid://beevon71h8ftu" path="res://menus/select_character/select_character.gd" id="1_mdpp6"]
+
+[node name="Select character" type="Node2D"]
+script = ExtResource("1_mdpp6")
+
+[node name="Exetior_play" type="Button" parent="."]
+offset_left = 412.0
+offset_top = 219.0
+offset_right = 708.0
+offset_bottom = 296.0
+theme_override_font_sizes/font_size = 50
+text = "Exetior
+"
+
+[node name="Sonic_play" type="Button" parent="."]
+offset_left = 415.0
+offset_top = 71.0
+offset_right = 711.0
+offset_bottom = 148.0
+theme_override_font_sizes/font_size = 50
+text = "Sonic"
+
+[connection signal="pressed" from="Exetior_play" to="." method="_on_cream_play_pressed"]
+[connection signal="pressed" from="Exetior_play" to="." method="_on_exetior_play_pressed"]
+[connection signal="pressed" from="Sonic_play" to="." method="_on_sonic_play_pressed"]

@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://bs2uf31uotmji"]
+
+[ext_resource type="Script" uid="uid://u5niwrgmwpjv" path="res://hud/hud.gd" id="1_6ca3a"]
+
+[node name="hud" type="CanvasLayer"]
+script = ExtResource("1_6ca3a")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 110.0
+offset_bottom = 44.0
+theme_override_font_sizes/font_size = 31
+text = "RINGS: "
+
+[node name="RingsCounter" type="Label" parent="."]
+offset_left = 107.0
+offset_top = 1.0
+offset_right = 147.0
+offset_bottom = 51.0
+theme_override_font_sizes/font_size = 31
+text = "0"

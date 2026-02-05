@@ -1,0 +1,419 @@
+[gd_scene load_steps=43 format=3 uid="uid://c14ux88uvqxm"]
+
+[ext_resource type="Script" uid="uid://b5fgd4mstgkek" path="res://characters/exetior/exetior.gd" id="1_akjvq"]
+[ext_resource type="Texture2D" uid="uid://25uonlds5mxo" path="res://characters/exetior/exetior-sprites.png" id="2_akjvq"]
+[ext_resource type="AudioStream" uid="uid://ducsdqbfgw1np" path="res://characters/sonic/sounds/jump.mp3" id="3_q0r51"]
+[ext_resource type="AudioStream" uid="uid://bavuwgt46s5pc" path="res://characters/sonic/sounds/spindash_release.mp3" id="4_62sli"]
+[ext_resource type="AudioStream" uid="uid://bf5qo2oncewdg" path="res://characters/sonic/sounds/Rush.wav" id="5_b5tnf"]
+[ext_resource type="AudioStream" uid="uid://bqstirama3j28" path="res://characters/sonic/sounds/spindash_charge.mp3" id="5_scjh1"]
+[ext_resource type="AudioStream" uid="uid://b3cw0qshqhjbn" path="res://characters/sonic/sounds/roll.mp3" id="6_jg2df"]
+[ext_resource type="AudioStream" uid="uid://cgjy4i5wu6veo" path="res://characters/sonic/sounds/skid.mp3" id="7_ewc6x"]
+[ext_resource type="AudioStream" uid="uid://dugss15cfjotl" path="res://characters/sonic/sounds/DeathSound.mp3" id="8_sb41v"]
+[ext_resource type="AudioStream" uid="uid://xb8x574wioor" path="res://characters/sonic/sounds/rings_lose.mp3" id="9_61n81"]
+[ext_resource type="Script" uid="uid://6e4jhb08es6g" path="res://characters/states/state_machine.gd" id="10_trq04"]
+[ext_resource type="Script" uid="uid://b2dsridkxnl3a" path="res://characters/states/idle.gd" id="11_ab0a8"]
+[ext_resource type="AudioStream" uid="uid://blytu1vcq2qux" path="res://sounds/ExetiorLaugh.wav" id="11_q0r51"]
+[ext_resource type="Script" uid="uid://dc48ht0om358f" path="res://characters/states/run.gd" id="12_h0qre"]
+[ext_resource type="Script" uid="uid://clmmg3ey5tjis" path="res://characters/states/jump.gd" id="13_qfmlp"]
+[ext_resource type="Script" uid="uid://c3sogkry4drfd" path="res://characters/states/roll.gd" id="14_vq1ak"]
+[ext_resource type="Script" uid="uid://2qdji157mifw" path="res://characters/states/spindash.gd" id="15_l6e15"]
+[ext_resource type="Script" uid="uid://cal5d1k7qjrl5" path="res://characters/states/skid.gd" id="16_3qmhx"]
+[ext_resource type="Script" uid="uid://bf1xjicg4mni5" path="res://characters/states/crouch.gd" id="17_vk11w"]
+[ext_resource type="Script" uid="uid://cu251fw58uxku" path="res://characters/states/hurt.gd" id="18_03y2y"]
+[ext_resource type="Script" uid="uid://bwr0rw25fikpx" path="res://characters/states/dead.gd" id="19_bo65c"]
+[ext_resource type="Script" uid="uid://dhbbop3ihyokd" path="res://characters/states/look_up.gd" id="20_utssd"]
+[ext_resource type="Script" uid="uid://bqd6ff8w53021" path="res://characters/states/fly.gd" id="21_akjvq"]
+
+[sub_resource type="Animation" id="Animation_b5tnf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(70, 1182, 26, 40)]
+}
+
+[sub_resource type="Animation" id="Animation_sb41v"]
+resource_name = "crouch"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Rect2(248, 1031, 32, 39), Rect2(281, 1031, 33.995, 39)]
+}
+
+[sub_resource type="Animation" id="Animation_ab0a8"]
+resource_name = "dead"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(276, 2159, 33, 38)]
+}
+
+[sub_resource type="Animation" id="Animation_qfmlp"]
+resource_name = "fall"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Rect2(533, 1424, 34, 48), Rect2(569, 1423, 34, 50)]
+}
+
+[sub_resource type="Animation" id="Animation_h0qre"]
+resource_name = "fly"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Rect2(42, 1343, 37, 30), Rect2(81, 1343, 37, 30)]
+}
+
+[sub_resource type="Animation" id="Animation_vq1ak"]
+resource_name = "fly slow"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Rect2(42, 698, 27, 51), Rect2(69, 698, 27, 51)]
+}
+
+[sub_resource type="Animation" id="Animation_trq04"]
+resource_name = "hurt"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Rect2(130, 2156, 33, 43), Rect2(165, 2155, 33, 45)]
+}
+
+[sub_resource type="Animation" id="Animation_6s3v3"]
+resource_name = "idle"
+length = 30.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10, 10.1, 10.2, 10.3, 10.4, 10.5, 10.6, 10.7, 10.8, 10.9, 11, 11.1, 11.2, 11.3, 11.4, 11.5, 11.6, 11.7013, 11.8, 11.9, 12, 12.1013, 12.2, 12.3, 12.4, 12.5013, 12.6, 12.7, 12.8, 12.9013, 13, 13.1, 13.2, 13.3013, 13.4, 13.5, 13.6, 13.7013, 13.8, 13.9, 14.0013, 14.1, 14.2, 14.3, 14.4013, 14.5, 14.6, 14.7, 14.8013, 14.9, 15, 15.1, 15.2013, 15.3, 15.4, 15.5013, 15.6, 15.7, 15.8, 15.9013, 16, 16.1, 16.2, 16.3013, 16.4, 16.5, 16.6, 16.7013, 16.8, 16.9, 17.0013, 17.1, 17.2, 17.3, 17.4013, 17.5, 17.6, 17.7, 17.8013, 17.9, 18, 18.1, 18.2013, 18.3, 18.4, 18.5013, 18.6, 18.7, 18.8, 18.9013, 19, 19.1, 19.2, 19.3013, 19.4, 19.5, 19.6, 19.7013, 19.8, 19.9, 20.0013, 20.1, 20.2, 20.3, 20.4013, 20.5, 20.6, 20.7, 20.8013, 20.9, 21, 21.1, 21.2013, 21.3, 21.4, 21.5013, 21.6, 21.7, 21.8, 21.9013, 22, 22.1, 22.2, 22.3013, 22.4, 22.5, 22.6, 22.7013, 22.8, 22.9, 23.0013, 23.1, 23.2, 23.3, 23.4013, 23.5, 23.6, 23.7, 23.8013, 23.9, 24, 24.1, 24.2013, 24.3, 24.4, 24.5013, 24.6, 24.7, 24.8, 24.9013, 25, 25.1, 25.2, 25.3013, 25.4, 25.5, 25.6, 25.7013, 25.8, 25.9, 26.0013, 26.1, 26.2, 26.3, 26.4013, 26.5, 26.6, 26.7, 26.8013, 26.9, 27, 27.1, 27.2013, 27.3, 27.4, 27.5013, 27.6, 27.7, 27.8, 27.9013, 28, 28.1, 28.2, 28.3013, 28.4, 28.5, 28.6, 28.7013, 28.8, 28.9, 29.0013, 29.1, 29.2, 29.3, 29.4013, 29.5, 29.6, 29.7, 29.8013, 29.9, 30),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(41, 2434, 29, 39), Rect2(41, 2434, 29, 39), Rect2(71, 2434, 29, 39), Rect2(102, 2434, 29, 39), Rect2(133, 2434, 29, 39), Rect2(163, 2434, 31, 39), Rect2(209, 2434, 45, 39), Rect2(260, 2434, 43, 39), Rect2(307, 2433, 41, 39), Rect2(352, 2433, 41, 39), Rect2(398, 2433, 41, 39), Rect2(446, 2433, 41, 39), Rect2(502, 2433, 43, 39), Rect2(548, 2433, 35, 39), Rect2(594, 2433, 31, 39), Rect2(633, 2433, 29, 39), Rect2(664, 2432, 43, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(842, 2432, 43, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(842, 2432, 43, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(842, 2432, 43, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(842, 2432, 43, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(842, 2432, 43, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(842, 2432, 43, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(842, 2432, 43, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(842, 2432, 43, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(842, 2432, 43, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(842, 2432, 43, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(842, 2432, 43, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(842, 2432, 43, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(842, 2432, 43, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(842, 2432, 43, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(842, 2432, 43, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(842, 2432, 43, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(842, 2432, 43, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(842, 2432, 43, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(842, 2432, 43, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(842, 2432, 43, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(842, 2432, 43, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(842, 2432, 43, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(842, 2432, 43, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(842, 2432, 43, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(842, 2432, 43, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(842, 2432, 43, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(842, 2432, 43, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(842, 2432, 43, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(842, 2432, 43, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(842, 2432, 43, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(842, 2432, 43, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(842, 2432, 43, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(842, 2432, 43, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(842, 2432, 43, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(842, 2432, 43, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(842, 2432, 43, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(842, 2432, 43, 41), Rect2(717, 2432, 45, 41), Rect2(767, 2432, 37, 41), Rect2(810, 2432, 31, 41), Rect2(842, 2432, 43, 41)]
+}
+
+[sub_resource type="Animation" id="Animation_jg2df"]
+resource_name = "jump"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(42, 1377, 30, 39), Rect2(74, 1377, 30, 39), Rect2(106, 1377, 30, 39), Rect2(138, 1377, 30, 39), Rect2(170, 1377, 30, 39)]
+}
+
+[sub_resource type="Animation" id="Animation_62sli"]
+resource_name = "look_up"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Rect2(35, 1079, 35, 41), Rect2(76, 1080, 39, 39)]
+}
+
+[sub_resource type="Animation" id="Animation_scjh1"]
+resource_name = "roll"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(42, 1377, 30, 39), Rect2(74, 1377, 30, 39), Rect2(106, 1377, 30, 39), Rect2(138, 1377, 30, 39), Rect2(170, 1377, 30, 39)]
+}
+
+[sub_resource type="Animation" id="Animation_q0r51"]
+resource_name = "run"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(42, 1234, 32, 39), Rect2(76, 1234, 32, 39.01), Rect2(108.995, 1234, 32, 39.01), Rect2(143, 1234, 32, 39.01)]
+}
+
+[sub_resource type="Animation" id="Animation_ewc6x"]
+resource_name = "skid"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Rect2(382, 1080, 35, 39), Rect2(419, 1080, 34, 39)]
+}
+
+[sub_resource type="Animation" id="Animation_61n81"]
+resource_name = "spindash"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(240, 1377, 29, 39), Rect2(271, 1377, 29, 39), Rect2(302, 1377, 29, 39), Rect2(333, 1377, 29, 39), Rect2(364, 1377, 29, 39), Rect2(208, 1377, 30, 39)]
+}
+
+[sub_resource type="Animation" id="Animation_akjvq"]
+resource_name = "walk"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(317, 1178, 25, 49), Rect2(344, 1178, 32, 49), Rect2(378, 1180, 38, 45), Rect2(418, 1180, 33, 45), Rect2(453, 1178, 25, 49), Rect2(480, 1178, 34, 49), Rect2(516, 1179, 39, 47), Rect2(557, 1180, 35, 45)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_akjvq"]
+_data = {
+&"RESET": SubResource("Animation_b5tnf"),
+&"crouch": SubResource("Animation_sb41v"),
+&"dead": SubResource("Animation_ab0a8"),
+&"fall": SubResource("Animation_qfmlp"),
+&"fly": SubResource("Animation_h0qre"),
+&"fly_slow": SubResource("Animation_vq1ak"),
+&"hurt": SubResource("Animation_trq04"),
+&"idle": SubResource("Animation_6s3v3"),
+&"jump": SubResource("Animation_jg2df"),
+&"look_up": SubResource("Animation_62sli"),
+&"roll": SubResource("Animation_scjh1"),
+&"run": SubResource("Animation_q0r51"),
+&"skid": SubResource("Animation_ewc6x"),
+&"spindash": SubResource("Animation_61n81"),
+&"walk": SubResource("Animation_akjvq")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_trxx8"]
+size = Vector2(19, 37.2575)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_or84h"]
+size = Vector2(19, 37.2419)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0rh6d"]
+radius = 14.1457
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Exetior" type="CharacterBody2D" parent="."]
+collision_mask = 46
+floor_constant_speed = true
+floor_snap_length = 32.0
+script = ExtResource("1_akjvq")
+max_speed = 700.0
+boost_speed = 1000.0
+spindash_speed_per_level = 100.0
+
+[node name="Camera2D" type="Camera2D" parent="Exetior"]
+position = Vector2(0, -0.5)
+zoom = Vector2(3.5, 3.5)
+limit_left = 0
+limit_top = -999999
+position_smoothing_speed = 2.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_vertical_offset = -0.48
+drag_left_margin = 0.0
+drag_right_margin = 0.0
+drag_bottom_margin = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Exetior"]
+libraries = {
+&"": SubResource("AnimationLibrary_akjvq")
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="Exetior"]
+z_index = 10
+texture_filter = 1
+texture = ExtResource("2_akjvq")
+region_enabled = true
+region_rect = Rect2(70, 1182, 26, 40)
+
+[node name="Hitbox_Stand" type="CollisionShape2D" parent="Exetior"]
+show_behind_parent = true
+position = Vector2(4.5, 0.87125)
+shape = SubResource("RectangleShape2D_trxx8")
+one_way_collision_margin = 128.0
+
+[node name="Hitbox_standLeft" type="CollisionShape2D" parent="Exetior"]
+show_behind_parent = true
+position = Vector2(-4.5, 0.863438)
+shape = SubResource("RectangleShape2D_or84h")
+one_way_collision_margin = 113.5
+
+[node name="Hitbox_roll" type="CollisionShape2D" parent="Exetior"]
+show_behind_parent = true
+top_level = true
+position = Vector2(0, 5.325)
+shape = SubResource("CircleShape2D_0rh6d")
+one_way_collision_margin = 20.0
+
+[node name="Jump_sound" type="AudioStreamPlayer2D" parent="Exetior"]
+stream = ExtResource("3_q0r51")
+volume_db = -12.0
+
+[node name="spindash_roll_sound" type="AudioStreamPlayer2D" parent="Exetior"]
+stream = ExtResource("4_62sli")
+volume_db = -12.0
+
+[node name="speed_chute_sound" type="AudioStreamPlayer2D" parent="Exetior"]
+stream = ExtResource("5_b5tnf")
+volume_db = -12.0
+
+[node name="spindash_charge_sound" type="AudioStreamPlayer2D" parent="Exetior"]
+stream = ExtResource("5_scjh1")
+volume_db = -12.0
+
+[node name="roll_sound" type="AudioStreamPlayer2D" parent="Exetior"]
+stream = ExtResource("6_jg2df")
+volume_db = -12.0
+
+[node name="skid_sound" type="AudioStreamPlayer2D" parent="Exetior"]
+stream = ExtResource("7_ewc6x")
+volume_db = -12.0
+
+[node name="death_sound" type="AudioStreamPlayer2D" parent="Exetior"]
+stream = ExtResource("8_sb41v")
+volume_db = 1.0
+
+[node name="scatter_rings_sound" type="AudioStreamPlayer2D" parent="Exetior"]
+stream = ExtResource("9_61n81")
+volume_db = -12.0
+
+[node name="emotion_sound" type="AudioStreamPlayer2D" parent="Exetior"]
+stream = ExtResource("11_q0r51")
+
+[node name="StateMachine" type="Node" parent="Exetior"]
+script = ExtResource("10_trq04")
+
+[node name="Idle" type="Node" parent="Exetior/StateMachine"]
+script = ExtResource("11_ab0a8")
+
+[node name="Run" type="Node" parent="Exetior/StateMachine"]
+script = ExtResource("12_h0qre")
+
+[node name="Jump" type="Node" parent="Exetior/StateMachine"]
+script = ExtResource("13_qfmlp")
+
+[node name="Roll" type="Node" parent="Exetior/StateMachine"]
+script = ExtResource("14_vq1ak")
+
+[node name="Spindash" type="Node" parent="Exetior/StateMachine"]
+script = ExtResource("15_l6e15")
+
+[node name="Skid" type="Node" parent="Exetior/StateMachine"]
+script = ExtResource("16_3qmhx")
+
+[node name="Crouch" type="Node" parent="Exetior/StateMachine"]
+script = ExtResource("17_vk11w")
+
+[node name="Hurt" type="Node" parent="Exetior/StateMachine"]
+script = ExtResource("18_03y2y")
+
+[node name="Dead" type="Node" parent="Exetior/StateMachine"]
+script = ExtResource("19_bo65c")
+
+[node name="LookUp" type="Node" parent="Exetior/StateMachine"]
+script = ExtResource("20_utssd")
+
+[node name="Fly" type="Node" parent="Exetior/StateMachine"]
+script = ExtResource("21_akjvq")

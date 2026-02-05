@@ -1,0 +1,98 @@
+[gd_scene load_steps=10 format=3 uid="uid://dh2xehigbwv2h"]
+
+[ext_resource type="Script" uid="uid://c74mlyb74rp8l" path="res://enemies/test_enemy/scripts/test_enemy.gd" id="1_lcl3f"]
+[ext_resource type="Texture2D" uid="uid://b3s124ph1fehd" path="res://enemies/test_enemy/sprites/enemiesSprites.png" id="2_2bghh"]
+[ext_resource type="AudioStream" uid="uid://cd4a4v30oumh1" path="res://enemies/test_enemy/sounds/badnik_death.mp3" id="3_8ifd5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m0o02"]
+size = Vector2(0, 0.5)
+
+[sub_resource type="Animation" id="Animation_2bghh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(312.996, 97.986, 39.009, 36.0244)]
+}
+
+[sub_resource type="Animation" id="Animation_if8y3"]
+resource_name = "explode"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(3.00926, 391.002, 23.9893, 16.0003), Rect2(28.9976, 383.004, 32.0094, 31.9957), Rect2(62.988, 383.004, 32.009, 31.996), Rect2(97.0012, 378.994, 39.9888, 40.0157), Rect2(138.996, 378.994, 39.989, 40.016)]
+}
+
+[sub_resource type="Animation" id="Animation_8ifd5"]
+resource_name = "walk"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(312.996, 97.986, 39.009, 36.0244), Rect2(360.986, 96.0131, 39.009, 37.9969), Rect2(408.956, 97.9215, 39.009, 36.0885), Rect2(456.996, 96.0391, 39.009, 37.9709)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_evp1i"]
+_data = {
+&"RESET": SubResource("Animation_2bghh"),
+&"destroy": SubResource("Animation_if8y3"),
+&"walk": SubResource("Animation_8ifd5")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2bghh"]
+size = Vector2(42, 32)
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 32
+collision_mask = 8
+script = ExtResource("1_lcl3f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 16.25)
+shape = SubResource("RectangleShape2D_m0o02")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_2bghh")
+region_enabled = true
+region_rect = Rect2(312.996, 97.986, 39.009, 36.0244)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_evp1i")
+}
+
+[node name="PlayerDetectionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectionArea"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_2bghh")
+
+[node name="death_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_8ifd5")
+volume_db = -12.0
+
+[connection signal="body_entered" from="PlayerDetectionArea" to="." method="_on_area_2d_body_entered"]

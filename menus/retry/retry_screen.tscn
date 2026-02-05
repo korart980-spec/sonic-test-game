@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwyvgjjvhexmj"]
+
+[ext_resource type="Script" uid="uid://ug5n5qqskr6i" path="res://screens/RetryScreen.gd" id="1_2wkn3"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_2wkn3")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 0
+offset_right = 1151.0
+offset_bottom = 646.0
+color = Color(0, 0, 0, 0)
+
+[node name="Giveup" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 278.0
+offset_top = 21.0
+offset_right = 903.0
+offset_bottom = 221.0
+theme_override_font_sizes/font_size = 146
+text = "GIVE UP?"
+
+[node name="PressX" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 354.0
+offset_top = 434.0
+offset_right = 825.0
+offset_bottom = 504.0
+theme_override_font_sizes/font_size = 51
+text = "Press X to continue"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control"]
+
+[node name="Timer" type="Timer" parent="Control"]
